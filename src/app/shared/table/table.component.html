@@ -1,0 +1,87 @@
+<div class="h-full w-full rounded-lg">
+  <p-table
+    [columns]="cols"
+    [value]="data"
+    [rows]="config.per_page"
+    [paginator]="true"
+    [scrollable]="true"
+    [scrollHeight]="'flex'"
+    [resizableColumns]="true"
+    [columnResizeMode]="'fit'"
+    styleClass=" h-full p-datatable-sm"
+    [lazy]="lazy"
+    (onLazyLoad)="page.next($event); dd($event)"
+    [totalRecords]="config.total"
+  >
+    <ng-template pTemplate="header" let-columns>
+      <tr>
+        <th
+          pResizableColumn
+          [pSortableColumn]="col.sort ? col.key : ''"
+          class="min-w-20"
+          *ngFor="let col of cols"
+        >
+          <div>
+            <p-sortIcon *ngIf="col.sort" [field]="col.key"></p-sortIcon>
+            <span>
+              {{ col.header }}
+            </span>
+          </div>
+        </th>
+        <th style="width: 5rem !important" *ngIf="actions.length > 0">
+          Actions
+        </th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-rowData let-columns="columns">
+      <tr>
+        <td *ngFor="let col of cols">
+          <ng-container
+            [ngTemplateOutlet]="col.type | templateRef"
+            [ngTemplateOutletContext]="{
+              value: rowData[col.key],
+              key: col.key
+            }"
+          >
+          </ng-container>
+        </td>
+        <td
+          style="width: 5rem !important"
+          class="relative"
+          *ngIf="actions.length > 0"
+        >
+          <button
+            pButton
+            class="p-button-text p-button-rounded p-button-secondary"
+            type="button"
+            (click)="op.toggle($event)"
+            icon="pi pi-ellipsis-v"
+          ></button>
+          <p-overlayPanel #op>
+            <ng-template pTemplate="content">
+              <div class="m-1 my-2" *ngFor="let item of actions">
+                <a
+                  (click)="exac(item, rowData)"
+                  type="button"
+                  [pTooltip]="item.label"
+                  tooltipPosition="left"
+                  [ngClass]="['p-2 px-3 cursor-pointer']"
+                >
+                  <span [class]="item.icon"> </span>
+                  <span class="px-1">
+                    {{ item.label }}
+                  </span>
+                </a>
+              </div>
+            </ng-template>
+          </p-overlayPanel>
+        </td>
+      </tr>
+    </ng-template>
+  </p-table>
+</div>
+
+<ng-template templateRef="default" let-value="value"> {{ value }}</ng-template>
+<ng-template templateRef="image" let-value="value">
+  <img [src]="value" alt="Avatar" class="w-14 rounded-full"
+/></ng-template>

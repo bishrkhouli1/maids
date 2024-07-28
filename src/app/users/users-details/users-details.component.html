@@ -1,0 +1,26 @@
+<div class="mt-4 mx-4">
+  <a [routerLink]="['/']"> <i class="pi pi-arrow-left text-3xl"></i></a>
+</div>
+<div class="mt-20">
+  <div class="m-auto min-w-1/4 w-fit rounded-lg bg-white shadow-xl p-8">
+    <div class="flex justify-center flex-wrap">
+      <div class="relative w-full flex justify-center">
+        <img
+          [src]="data?.avatar"
+          class="w-40 h-40 rounded-full absolute -top-24 border-8 border-slate-100"
+          alt=""
+        />
+      </div>
+      <div class="w-full mt-20 grid grid-cols-2 gap-2">
+        <div class="text-xl">id :</div>
+        <div class="">{{ data?.id }}</div>
+        <div class="text-xl">first Name :</div>
+        <div class="">{{ data?.first_name }}</div>
+        <div class="text-xl">last Name :</div>
+        <div class="">{{ data?.last_name }}</div>
+        <div class="text-xl">email :</div>
+        <div class="">{{ data?.email }}</div>
+      </div>
+    </div>
+  </div>
+</div>

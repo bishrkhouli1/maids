@@ -1,0 +1,10 @@
+<div class="relative mt-8 mx-20 shadow-2xl h-full rounded-lg">
+  <app-table
+    [cols]="cols"
+    [data]="(getData | async) || []"
+    [actions]="actions"
+    [lazy]="true"
+    [page]="page$"
+    [config]="(config$ | async) || { total: 0, per_page: 0 }"
+  ></app-table>
+</div>

@@ -1,0 +1,15 @@
+<header class="w-svw bg-slate-400 p-4">
+  <div class="flex justify-between mx-4">
+    <span class="text-white font-bold text-3xl"> Bishr </span>
+
+    <div>
+      <input
+        type="text"
+        pInputText
+        ngModel
+        placeholder="search by id"
+        (ngModelChange)="user.filter$.next($event)"
+      />
+    </div>
+  </div>
+</header>

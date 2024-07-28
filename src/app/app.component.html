@@ -1,0 +1,10 @@
+<div class="bg-slate-100 min-h-svh">
+  <app-header />
+  <router-outlet></router-outlet>
+  <div
+    *ngIf="loading.spinner()"
+    class="absolute w-full h-full z-10 flex justify-center items-center top-0 bg-black bg-opacity-25"
+  >
+    <p-progressSpinner ariaLabel="loading" />
+  </div>
+</div>
